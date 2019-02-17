@@ -8,7 +8,7 @@ export function receiveCategories(categories) {
     categories
   };
 }
-export function handleReceiveCategories(categories) {
+export function handleReceiveCategories() {
   return dispatch => {
     return API.getCategories().then(categories => {
       dispatch(receiveCategories(categories));
