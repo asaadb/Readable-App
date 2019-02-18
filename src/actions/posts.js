@@ -1,4 +1,4 @@
-import * as API from "../utils/Api";
+import * as API from "../utils/api";
 import uuid from "uuid";
 
 export const GET_POSTS = "GET_POSTS";

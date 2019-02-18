@@ -1,10 +1,10 @@
-import * as API from "../utils/Api";
+import * as API from "../utils/api";
 import uuid from "uuid";
 
 export const GET_COMMENTS = "GET_COMMENTS";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
-export const DELETE_COMMENT = "DELETE_COMMENT";
+export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
 
 export function receiveComments(comments) {
@@ -38,7 +38,7 @@ export function voteComment({ id, option }) {
 
 export function removeComment(id) {
   return {
-    type: DELETE_COMMENT,
+    type: REMOVE_COMMENT,
     id
   };
 }

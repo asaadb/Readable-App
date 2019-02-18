@@ -1,4 +1,4 @@
-import * as API from "../utils/Api";
+import * as API from "../utils/api";
 
 export const GET_CATEGORIES = "GET_CATEGORIES";
 
