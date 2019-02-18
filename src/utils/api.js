@@ -99,13 +99,13 @@ export const addComment = ({ body, author, parentId, id, timestamp }) =>
     })
   }).then(res => res.json());
 
-export const editComment = ({ postId, body }) =>
-  fetch(`${api}/comments/${postId}`, {
+export const editComment = ({ id, body, timestamp }) =>
+  fetch(`${api}/comments/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify({
       body,
-      timestamp: Date.now()
+      timestamp
     })
   }).then(res => res.json());
 

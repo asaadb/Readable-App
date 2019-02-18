@@ -6,7 +6,7 @@ import {
   VOTE_POST
 } from "../actions/posts";
 
-export default function questions(state = {}, action) {
+export default function posts(state = {}, action) {
   switch (action.type) {
     case GET_POSTS:
       return {
