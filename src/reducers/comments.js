@@ -7,55 +7,32 @@ import {
 } from "../actions/comments";
 import { REMOVE_POST } from "../actions/posts";
 
-export default function comments(state = {}, action) {
+export default function comments(state = [], action) {
   switch (action.type) {
     case GET_COMMENTS:
-    let newPosts = {}
-      for(let comment of action.comments) {
-          newPosts[comment.id] = comment
-      }
-      return {
-        ...state,
-        ...newPosts,
-      };
+      return state.concat(...action.comments);
     case ADD_COMMENT:
-      return {
-        ...state,
-        ...action.comment
-      };
+      return state.concat(...action.comment);
     case EDIT_COMMENT:
-      return {
-        ...state,
-        [action.comment.id]: {
-          ...state[action.comment.id],
-          body: action.comment.body,
-          timestamp: action.comment.timestamp
-        }
-      };
+      let comment = state.find(comment => comment.id === action.comment.id);
+      comment.body = action.comment.body;
+      comment.timestamp = action.comment.timestamp;
+      return state;
     case VOTE_COMMENT:
-      return {
-        ...state,
-        [action.id]: {
-          ...state[action.id],
-          voteScore:
-            action.option === "upVote"
-              ? state[action.id].voteScore + 1
-              : state[action.id].voteScore - 1
-        }
-      };
+      if (action.option === "upVote") {
+        state.find(comment => comment.id === action.id).voteScore += 1;
+        return state;
+      } else {
+        state.find(comment => comment.id === action.id).voteScore -= 1;
+        return state;
+      }
     case REMOVE_COMMENT:
-      const updatedState = { ...state };
-      delete updatedState[action.id];
+      const updatedState = state.filter(comment => comment.id !== action.id);
       return updatedState;
     case REMOVE_POST:
-      const preState = state;
-      const newStateKeys = Object.keys(preState).filter(
-        key => preState[key].parentId !== action.postId
+      const newState = state.filter(
+        comment => comment.parentId !== action.postId
       );
-      const newState = {};
-      for (let key of newStateKeys) {
-        newState[key] = preState[key];
-      }
       return newState;
     default:
       return state;
