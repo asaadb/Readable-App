@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
@@ -7,11 +8,13 @@ class Dashboard extends Component {
     console.log('Posts: ', this.props.posts)
     const { posts, categories } = this.props
     return (
-      <div className='container' >
+      <div className='container'>
         <section className='categories'>
           {categories.map(category => (
             <div className='category' key={category.name}>
+            <Link to={`/${category.name}`} className="category-link">
               <h2>{category.name.toUpperCase()}</h2>
+            </Link>
             </div>
           ))}
         </section>
