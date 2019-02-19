@@ -6,45 +6,27 @@ import {
   VOTE_POST
 } from "../actions/posts";
 
-export default function posts(state = {}, action) {
+export default function posts(state = [], action) {
   switch (action.type) {
     case GET_POSTS:
-    let newPosts = {}
-      for(let post of action.posts) {
-          newPosts[post.id] = post
-      }
-      return {
-        ...state,
-        ...newPosts,
-      };
+      return state.concat(...action.posts);
     case ADD_POST:
-      return {
-        ...state,
-        ...action.post
-      };
+      return state.concat(...action.post);
     case EDIT_POST:
-      return {
-        ...state,
-        [action.postId]: {
-          ...state[action.postId],
-          title: action.title,
-          body: action.body
-        }
-      };
+      let post = state.find(post => post.id === action.postId);
+      post.body = action.post.body;
+      post.title = action.post.title;
+      return state;
     case VOTE_POST:
-      return {
-        ...state,
-        [action.postId]: {
-          ...state[action.postId],
-          voteScore:
-            action.option === "upVote"
-              ? state[action.postId].voteScore + 1
-              : state[action.postId].voteScore - 1
-        }
-      };
+      if (action.option === "upVote") {
+        state.find(post => post.id === action.postId).voteScore += 1;
+        return state;
+      } else {
+        state.find(post => post.id === action.postId).voteScore -= 1;
+        return state;
+      }
     case REMOVE_POST:
-      const updatedState = { ...state };
-      delete updatedState[action.postId];
+      const updatedState = state.filter(post => post.id !== action.postId);
       return updatedState;
     default:
       return state;
