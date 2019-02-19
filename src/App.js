@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './components/Dashboard'
+import { handleReceiveCategories } from './actions/categories'
+import { handleReceivePosts } from './actions/posts'
+import { connect } from "react-redux";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleReceiveCategories())
+    this.props.dispatch(handleReceivePosts())
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Dashboard />
       </div>
     );
   }
 }
 
-export default App;
+export default connect()(App);
