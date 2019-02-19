@@ -14,8 +14,8 @@ export default function posts(state = [], action) {
       return state.concat(...action.post);
     case EDIT_POST:
       let post = state.find(post => post.id === action.postId);
-      post.body = action.post.body;
-      post.title = action.post.title;
+      post.body = action.body;
+      post.title = action.title;
       return state;
     case VOTE_POST:
       if (action.option === "upVote") {
