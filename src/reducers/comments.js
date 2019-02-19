@@ -10,9 +10,13 @@ import { REMOVE_POST } from "../actions/posts";
 export default function comments(state = {}, action) {
   switch (action.type) {
     case GET_COMMENTS:
+    let newPosts = {}
+      for(let comment of action.comments) {
+          newPosts[comment.id] = comment
+      }
       return {
         ...state,
-        ...action.comments
+        ...newPosts,
       };
     case ADD_COMMENT:
       return {

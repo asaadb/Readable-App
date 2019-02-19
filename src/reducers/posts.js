@@ -9,9 +9,13 @@ import {
 export default function posts(state = {}, action) {
   switch (action.type) {
     case GET_POSTS:
+    let newPosts = {}
+      for(let post of action.posts) {
+          newPosts[post.id] = post
+      }
       return {
         ...state,
-        ...action.posts
+        ...newPosts,
       };
     case ADD_POST:
       return {
