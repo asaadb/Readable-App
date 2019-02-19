@@ -18,15 +18,15 @@ class Dashboard extends Component {
         <section className='all-posts'>
           <h3> All Posts </h3>
           <ul className='posts'>
-            {Object.keys(posts).map(postId => (
-              <li key={postId}>
-                <h4>{posts[postId].title}</h4>
-                <p>id: {posts[postId].id}</p>
-                <p>author: {posts[postId].author}</p>
-                <p>body: {posts[postId].body}</p>
-                <p>timestamp: {posts[postId].timestamp}</p>
-                <p>Votes: {posts[postId].voteScore}</p>
-                <p>Comments: {posts[postId].commentCount}</p>
+            {posts.map(post => (
+              <li key={post.id}>
+                <h4>{post.title}</h4>
+                <p>id: {post.id}</p>
+                <p>author: {post.author}</p>
+                <p>body: {post.body}</p>
+                <p>timestamp: {post.timestamp}</p>
+                <p>Votes: {post.voteScore}</p>
+                <p>Comments: {post.commentCount}</p>
               </li>
             ))}
           </ul>
