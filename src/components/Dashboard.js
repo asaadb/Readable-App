@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Post from "./Post";
 
 class Dashboard extends Component {
   render() {
@@ -22,15 +23,7 @@ class Dashboard extends Component {
           <h3> All Posts </h3>
           <ul className='posts'>
             {posts.map(post => (
-              <li key={post.id}>
-                <h4>{post.title}</h4>
-                <p>id: {post.id}</p>
-                <p>author: {post.author}</p>
-                <p>body: {post.body}</p>
-                <p>timestamp: {post.timestamp}</p>
-                <p>Votes: {post.voteScore}</p>
-                <p>Comments: {post.commentCount}</p>
-              </li>
+              <Post post={post}/>
             ))}
           </ul>
         </section>
