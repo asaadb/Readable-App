@@ -7,28 +7,27 @@ import {
 } from "../actions/posts";
 
 export default function posts(state = [], action) {
+  let newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case GET_POSTS:
-      return state.concat(...action.posts);
+      return newState.concat(...action.posts);
     case ADD_POST:
-      return state.concat(...action.post);
+      return newState.concat(...action.post);
     case EDIT_POST:
-      let post = state.find(post => post.id === action.id);
+      let post = newState.find(post => post.id === action.id);
       post.body = action.body;
       post.title = action.title;
-      return state;
+      return newState;
     case VOTE_POST:
       if (action.option === "upVote") {
-        console.log('Find Vote: ', state.find(post => post.id === action.id))
-        state.find(post => post.id === action.id).voteScore += 1;
-        return state;
+        newState.find(post => post.id === action.id).voteScore += 1;
+        return newState;
       } else {
-        state.find(post => post.id === action.id).voteScore -= 1;
-        return state;
+        newState.find(post => post.id === action.id).voteScore -= 1;
+        return newState;
       }
     case REMOVE_POST:
-      const updatedState = state.filter(post => post.id !== action.id);
-      return updatedState;
+      return newState.filter(post => post.id !== action.id);
     default:
       return state;
   }
