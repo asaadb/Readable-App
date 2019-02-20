@@ -19,8 +19,14 @@ import {
   Edit,
   Delete
 } from "@material-ui/icons";
+import { handleVotePost } from "../actions/posts";
 
 class Post extends Component {
+  handleVote = option => {
+    const { dispatch } = this.props;
+    const { id } = this.props.post;
+    dispatch(handleVotePost({ id, option }));
+  };
   render() {
     const { post } = this.props;
     return (
@@ -63,10 +69,18 @@ class Post extends Component {
             <IconButton color="secondary" aria-label="open">
               <Delete />
             </IconButton>
-            <IconButton color="primary" aria-label="open">
+            <IconButton
+              color="primary"
+              aria-label="open"
+              onClick={() => this.handleVote("upVote")}
+            >
               <ThumbUp />
             </IconButton>
-            <IconButton color="secondary" aria-label="open">
+            <IconButton
+              color="secondary"
+              aria-label="open"
+              onClick={() => this.handleVote("downVote")}
+            >
               <ThumbDown />
             </IconButton>
           </CardActions>
