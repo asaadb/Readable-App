@@ -21,33 +21,34 @@ export function createPost(post) {
   };
 }
 
-export function updatePost({ postId, title, body }) {
+export function updatePost({ id, title, body }) {
   return {
     type: EDIT_POST,
-    postId,
+    id,
     title,
     body
   };
 }
 
-export function votePost({ postId, option }) {
+export function votePost({ id, option }) {
   return {
     type: VOTE_POST,
-    postId,
+    id,
     option
   };
 }
 
-export function removePost(postId) {
+export function removePost(id) {
   return {
     type: REMOVE_POST,
-    postId
+    id
   };
 }
 
 export function handleReceivePosts() {
   return dispatch => {
     return API.getAllPosts().then(posts => {
+
       dispatch(receivePosts(posts));
     });
   };
@@ -65,9 +66,9 @@ export function handleAddPost({ title, body, author, category }) {
   };
 }
 
-export function handleUpdatePost({ postId, title, body }) {
+export function handleUpdatePost({ id, title, body }) {
   return dispatch => {
-    return API.editPost({ postId, title, body }).then(post => {
+    return API.editPost({ id, title, body }).then(post => {
       dispatch(updatePost(post));
     });
   };

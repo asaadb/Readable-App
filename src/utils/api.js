@@ -51,8 +51,8 @@ export const addPost = ({ id, timestamp, title, body, author, category }) =>
     })
   }).then(res => res.json());
 
-export const editPost = ({ postId, title, body }) =>
-  fetch(`${api}/posts/${postId}`, {
+export const editPost = ({ id, title, body }) =>
+  fetch(`${api}/posts/${id}`, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify({
@@ -79,8 +79,8 @@ export const deletePost = id =>
     headers
   });
 
-export const getCommentsForPost = postId =>
-  fetch(`${api}/posts/${postId}/comments`, {
+export const getCommentsForPost = id =>
+  fetch(`${api}/posts/${id}/comments`, {
     headers
   })
     .then(res => res.json())

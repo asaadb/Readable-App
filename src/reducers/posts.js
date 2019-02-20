@@ -13,20 +13,21 @@ export default function posts(state = [], action) {
     case ADD_POST:
       return state.concat(...action.post);
     case EDIT_POST:
-      let post = state.find(post => post.id === action.postId);
+      let post = state.find(post => post.id === action.id);
       post.body = action.body;
       post.title = action.title;
       return state;
     case VOTE_POST:
       if (action.option === "upVote") {
-        state.find(post => post.id === action.postId).voteScore += 1;
+        console.log('Find Vote: ', state.find(post => post.id === action.id))
+        state.find(post => post.id === action.id).voteScore += 1;
         return state;
       } else {
-        state.find(post => post.id === action.postId).voteScore -= 1;
+        state.find(post => post.id === action.id).voteScore -= 1;
         return state;
       }
     case REMOVE_POST:
-      const updatedState = state.filter(post => post.id !== action.postId);
+      const updatedState = state.filter(post => post.id !== action.id);
       return updatedState;
     default:
       return state;
