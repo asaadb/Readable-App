@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import Post from "./Post";
 
 class Category extends Component {
   render() {
@@ -8,15 +9,7 @@ class Category extends Component {
       <div>
         <ul>
           {categoryPosts.map(post => (
-            <li key={post.id}>
-              <h4>{post.title}</h4>
-              <p>id: {post.id}</p>
-              <p>author: {post.author}</p>
-              <p>body: {post.body}</p>
-              <p>timestamp: {post.timestamp}</p>
-              <p>Votes: {post.voteScore}</p>
-              <p>Comments: {post.commentCount}</p>
-            </li>
+            <Post post={post} />
           ))
           }
         </ul>
