@@ -8,32 +8,29 @@ import {
 import { REMOVE_POST } from "../actions/posts";
 
 export default function comments(state = [], action) {
+  let newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case GET_COMMENTS:
-      return state.concat(...action.comments);
+      return newState.concat(...action.comments);
     case ADD_COMMENT:
-      return state.concat(...action.comment);
+      return newState.concat(...action.comment);
     case EDIT_COMMENT:
-      let comment = state.find(comment => comment.id === action.comment.id);
+      let comment = newState.find(comment => comment.id === action.comment.id);
       comment.body = action.comment.body;
       comment.timestamp = action.comment.timestamp;
-      return state;
+      return newState;
     case VOTE_COMMENT:
       if (action.option === "upVote") {
-        state.find(comment => comment.id === action.id).voteScore += 1;
-        return state;
+        newState.find(comment => comment.id === action.id).voteScore += 1;
+        return newState;
       } else {
-        state.find(comment => comment.id === action.id).voteScore -= 1;
-        return state;
+        newState.find(comment => comment.id === action.id).voteScore -= 1;
+        return newState;
       }
     case REMOVE_COMMENT:
-      const updatedState = state.filter(comment => comment.id !== action.id);
-      return updatedState;
+      return newState.filter(comment => comment.id !== action.id);
     case REMOVE_POST:
-      const newState = state.filter(
-        comment => comment.parentId !== action.postId
-      );
-      return newState;
+      return newState.filter( comment => comment.parentId !== action.id);
     default:
       return state;
   }
