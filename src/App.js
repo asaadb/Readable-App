@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dashboard from './components/Dashboard'
 import Category from './components/Category'
+import PostDetail from './components/PostDetail'
 import { handleReceiveCategories } from './actions/categories'
 import { handleReceivePosts } from './actions/posts'
 import { connect } from "react-redux";
@@ -18,6 +19,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path="/:category" exact component={Category} />
+            <Route path="/:category/:post_id" exact component={PostDetail} />
           </Switch>
         </div>
       </Router>
