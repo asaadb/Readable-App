@@ -3,30 +3,20 @@ import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import {
   Badge,
-  IconButton,
   Card,
-  CardActions,
   CardContent,
   Typography
 } from "@material-ui/core";
 import {
   ThumbsUpDown,
   Comment,
-  ThumbUp,
-  ThumbDown,
   AccessTime,
-  OpenInNew,
-  Edit,
-  Delete
 } from "@material-ui/icons";
 import { handleVotePost } from "../actions/posts";
+import PostActions from './PostActions'
 
 class Post extends Component {
-  handleVote = option => {
-    const { dispatch } = this.props;
-    const { id } = this.props.post;
-    dispatch(handleVotePost({ id, option }));
-  };
+
   render() {
     const { post } = this.props;
     return (
@@ -59,31 +49,7 @@ class Post extends Component {
               </Badge>
             </div>
           </div>
-          <CardActions className="action-icons">
-            <IconButton color="primary" aria-label="open">
-              <OpenInNew />
-            </IconButton>
-            <IconButton color="primary" aria-label="open">
-              <Edit />
-            </IconButton>
-            <IconButton color="secondary" aria-label="open">
-              <Delete />
-            </IconButton>
-            <IconButton
-              color="primary"
-              aria-label="open"
-              onClick={() => this.handleVote("upVote")}
-            >
-              <ThumbUp />
-            </IconButton>
-            <IconButton
-              color="secondary"
-              aria-label="open"
-              onClick={() => this.handleVote("downVote")}
-            >
-              <ThumbDown />
-            </IconButton>
-          </CardActions>
+          <PostActions showLink={true} post={post} />
         </CardContent>
       </Card>
     );
