@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
-import { Badge, Card, CardContent, Typography } from "@material-ui/core";
+import { Badge, Card, CardContent, Typography, CardActions } from "@material-ui/core";
 import { ThumbsUpDown, AccessTime, Comment } from "@material-ui/icons";
 
 import Comments from "../components/Comments";
@@ -50,11 +50,13 @@ class PostDetail extends Component {
                   </Badge>
                 </div>
               </div>
-              <PostActions showLink={false} post={post} />
+              <CardActions>
+                <PostActions showLink={false} post={post} />
+              </CardActions>
             </CardContent>
           </Card>
           {postComments.length > 0 &&
-            postComments.map(comment => <Comments comment={comment} />)}
+            postComments.map(comment => <Comments key={comment.id} comment={comment} />)}
         </div>
       );
     } else {

@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  IconButton,
-  CardActions,
-} from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import {
   ThumbUp,
   ThumbDown,
@@ -12,7 +9,7 @@ import {
   Edit,
   Delete
 } from "@material-ui/icons";
-import { handleVotePost } from "../actions/posts";
+import { handleVotePost, handleRemovePost } from "../actions/posts";
 
 class PostActions extends Component {
   handleVote = option => {
@@ -20,21 +17,33 @@ class PostActions extends Component {
     const { id } = this.props.post;
     dispatch(handleVotePost({ id, option }));
   };
+  handleRemove = () => {
+    const { dispatch } = this.props;
+    const { id } = this.props.post;
+    dispatch(handleRemovePost(id));
+  };
   render() {
     const { post, showLink } = this.props;
     return (
-      <CardActions className="action-icons">
-      {
-        showLink && <IconButton color="primary" aria-label="open">
-          <Link to = {`/${post.category}/${post.id}`}>
-            <OpenInNew />
-          </Link>
-        </IconButton>
-      }
-        <IconButton color="primary" aria-label="open">
+      <div>
+        {showLink && (
+          <IconButton color="primary" aria-label="open">
+            <Link to={`/${post.category}/${post.id}`}>
+              <OpenInNew />
+            </Link>
+          </IconButton>
+        )}
+        <IconButton
+          color="primary"
+          aria-label="open"
+        >
           <Edit />
         </IconButton>
-        <IconButton color="secondary" aria-label="open">
+        <IconButton
+          color="secondary"
+          aria-label="open"
+          onClick={this.handleRemove}
+        >
           <Delete />
         </IconButton>
         <IconButton
@@ -51,9 +60,9 @@ class PostActions extends Component {
         >
           <ThumbDown />
         </IconButton>
-      </CardActions>
-    )
+      </div>
+    );
   }
 }
 
-export default connect()(PostActions)
+export default connect()(PostActions);

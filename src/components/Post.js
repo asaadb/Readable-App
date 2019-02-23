@@ -5,14 +5,14 @@ import {
   Badge,
   Card,
   CardContent,
-  Typography
+  Typography,
+  CardActions
 } from "@material-ui/core";
 import {
   ThumbsUpDown,
   Comment,
   AccessTime,
 } from "@material-ui/icons";
-import { handleVotePost } from "../actions/posts";
 import PostActions from './PostActions'
 
 class Post extends Component {
@@ -32,7 +32,7 @@ class Post extends Component {
             </span>
           </div>
           <div className="vote-body">
-            <Typography noWrap variant="p" className="post-body">
+            <Typography noWrap className="post-body">
               {post.body}
             </Typography>
             <div className="vote-count">
@@ -49,7 +49,9 @@ class Post extends Component {
               </Badge>
             </div>
           </div>
+          <CardActions>
           <PostActions showLink={true} post={post} />
+          </CardActions>
         </CardContent>
       </Card>
     );
