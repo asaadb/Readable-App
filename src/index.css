@@ -59,33 +59,3 @@ body {
   list-style: none;
   justify-content: center;
 }
-
-.post {
-  width: 450px;
-  margin:1rem;
-}
-.post-title {
-  font-size: 2rem;
-}
-.author {
-  color:gray;
-  font-size: 1rem
-}
-.vote-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin:0.5rem;
-}
-.vote-count {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  margin:1rem;
-}
-
-.action-icons {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-}
