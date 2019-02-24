@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { formatDate } from "../utils/helpers";
-import { Badge, Card, CardContent, Typography, CardActions } from "@material-ui/core";
-import { ThumbsUpDown, AccessTime, Comment } from "@material-ui/icons";
 
 import Comments from "../components/Comments";
-import PostActions from "../components/PostActions";
+import Post from "../components/Post";
 import { handleReceiveComments } from "../actions/comments";
 
 class PostDetail extends Component {
@@ -19,42 +16,7 @@ class PostDetail extends Component {
     if (post) {
       return (
         <div>
-          <Card key={post.id} className="post">
-            <CardContent>
-              <Typography variant="h6" type="title">
-                {post.title}
-              </Typography>
-              <div className="author">
-                <AccessTime style={{ marginRight: 5 }} />
-                <span>
-                  {post.author} posted {formatDate(post.timestamp)}
-                </span>
-              </div>
-              <div className="vote-body">
-                <Typography className="post-body">{post.body}</Typography>
-                <div className="vote-count">
-                  <Badge
-                    badgeContent={post.voteScore}
-                    style={{ marginRight: 20 }}
-                    max={999}
-                    color="primary"
-                  >
-                    <ThumbsUpDown />
-                  </Badge>
-                  <Badge
-                    badgeContent={post.commentCount}
-                    max={999}
-                    color="primary"
-                  >
-                    <Comment />
-                  </Badge>
-                </div>
-              </div>
-              <CardActions>
-                <PostActions showLink={false} post={post} />
-              </CardActions>
-            </CardContent>
-          </Card>
+          <Post post={post} showLink={false} />
           {postComments.length > 0 &&
             postComments.map(comment => <Comments key={comment.id} comment={comment} />)}
         </div>

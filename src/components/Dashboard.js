@@ -43,7 +43,7 @@ class Dashboard extends Component {
           <h3> All Posts </h3>
           <ul className="posts">
             {posts.map(post => (
-              <Post post={post} key={post.id} />
+              <Post post={post} key={post.id} showLink={true} />
             ))}
           </ul>
         </section>

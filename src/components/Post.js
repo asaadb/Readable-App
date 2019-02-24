@@ -18,6 +18,10 @@ const styles = {
     margin: "1rem",
     display: "flex"
   },
+  postDetail: {
+    margin: "1rem",
+    display: "flex"
+  },
   content: {
     width: "95%",
     display: "flex",
@@ -35,7 +39,6 @@ const styles = {
   },
   voteBody: {
     display: "flex",
-    width: "100%",
     boxSizing: "border-box",
     justifyContent: "space-between",
     alignItems: "center",
@@ -56,13 +59,22 @@ const styles = {
 
 class Post extends Component {
   render() {
-    const { post, classes } = this.props;
+    const { post, classes, showLink } = this.props;
     return (
-      <Card key={post.id} className={classes.post}>
+      <Card
+        key={post.id}
+        className={showLink ? classes.post : classes.postDetail}
+      >
         <CardContent className={classes.content}>
-          <Typography variant="h6" noWrap type="title">
-            {post.title}
-          </Typography>
+          {showLink === true ? (
+            <Typography variant="h6" noWrap type="title">
+              {post.title}
+            </Typography>
+          ) : (
+            <Typography variant="h6" type="title">
+              {post.title}
+            </Typography>
+          )}
           <div className={classes.author}>
             <AccessTime style={{ marginRight: 5 }} />
             <span>
@@ -70,7 +82,11 @@ class Post extends Component {
             </span>
           </div>
           <div className={classes.voteBody}>
-            <Typography noWrap>{post.body}</Typography>
+            {showLink === true ? (
+              <Typography noWrap>{post.body}</Typography>
+            ) : (
+              <Typography>{post.body}</Typography>
+            )}
             <div className={classes.postCount}>
               <Badge
                 badgeContent={post.voteScore}
@@ -86,7 +102,7 @@ class Post extends Component {
             </div>
           </div>
           <CardActions>
-            <PostActions showLink={true} post={post} />
+            <PostActions showLink={showLink} post={post} />
           </CardActions>
         </CardContent>
       </Card>
