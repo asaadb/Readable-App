@@ -11,6 +11,15 @@ import {
 } from "@material-ui/icons";
 import { handleVotePost, handleRemovePost } from "../actions/posts";
 
+const styles = {
+  container: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "space-between",
+    width: "100%"
+  }
+};
+
 class PostActions extends Component {
   handleVote = option => {
     const { dispatch } = this.props;
@@ -25,41 +34,42 @@ class PostActions extends Component {
   render() {
     const { post, showLink } = this.props;
     return (
-      <div>
-        {showLink && (
+      <div style={styles.container}>
+        <div>
+          {showLink === true && (
+            <IconButton color="primary" aria-label="open">
+              <Link to={`/${post.category}/${post.id}`}>
+                <OpenInNew />
+              </Link>
+            </IconButton>
+          )}
           <IconButton color="primary" aria-label="open">
-            <Link to={`/${post.category}/${post.id}`}>
-              <OpenInNew />
-            </Link>
+            <Edit />
           </IconButton>
-        )}
-        <IconButton
-          color="primary"
-          aria-label="open"
-        >
-          <Edit />
-        </IconButton>
-        <IconButton
-          color="secondary"
-          aria-label="open"
-          onClick={this.handleRemove}
-        >
-          <Delete />
-        </IconButton>
-        <IconButton
-          color="primary"
-          aria-label="open"
-          onClick={() => this.handleVote("upVote")}
-        >
-          <ThumbUp />
-        </IconButton>
-        <IconButton
-          color="secondary"
-          aria-label="open"
-          onClick={() => this.handleVote("downVote")}
-        >
-          <ThumbDown />
-        </IconButton>
+          <IconButton
+            color="secondary"
+            aria-label="open"
+            onClick={this.handleRemove}
+          >
+            <Delete />
+          </IconButton>
+        </div>
+        <div>
+          <IconButton
+            color="primary"
+            aria-label="open"
+            onClick={() => this.handleVote("upVote")}
+          >
+            <ThumbUp />
+          </IconButton>
+          <IconButton
+            color="secondary"
+            aria-label="open"
+            onClick={() => this.handleVote("downVote")}
+          >
+            <ThumbDown />
+          </IconButton>
+        </div>
       </div>
     );
   }
