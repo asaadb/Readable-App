@@ -15,7 +15,7 @@ class PostDetail extends Component {
     const { postComments, post } = this.props;
     if (post) {
       return (
-        <div>
+        <div style={{maxWidth:1300, margin:'auto'}}>
           <Post post={post} showLink={false} />
           {postComments.length > 0 &&
             postComments.map(comment => <Comments key={comment.id} comment={comment} />)}
