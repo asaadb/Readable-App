@@ -4,29 +4,70 @@ import { formatDate } from "../utils/helpers";
 import {
   Badge,
   Card,
-  CardActions,
   CardContent,
-  Typography
+  Typography,
+  CardActions,
+  Avatar,
+  withStyles
 } from "@material-ui/core";
 import { ThumbsUpDown } from "@material-ui/icons";
 import CommentActions from "./CommentActions";
 
-class Comments extends Component {
+const styles = {
+  comment: {
+    margin: "1rem",
+    display: "flex"
+  },
+  content: {
+    width: "95%",
+    display: "flex",
+    flexFlow: "column",
+    boxSizing: "border-box",
+    margin: 10
+  },
+  avatar: {
+    margin: "5px 10px 0 0",
+    backgroundColor: "#2196f3"
+  },
+  author: {
+    color: "#A9A9A9",
+    fontSize: "1rem",
+    margin: "5px 0",
+    display: "flex",
+    alignItems: "baseline"
+  },
+  voteBody: {
+    display: "flex",
+    boxSizing: "border-box",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "0.5rem"
+  },
+  voteCount: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    alignItems: "center",
+    margin: 10
+  }
+};
+
+class Comment extends Component {
   render() {
-    const { comment } = this.props;
+    const { comment, classes } = this.props;
     return (
-      <Card key={comment.id} className="comment">
-        <CardContent>
-          <div className="author">
+      <Card className={classes.comment}>
+        <CardContent className={classes.content}>
+          <div className={classes.author}>
+            <Avatar className={classes.avatar}>
+              {comment.author[0].toUpperCase()}
+            </Avatar>
             <span>
               {comment.author} commented {formatDate(comment.timestamp)}
             </span>
           </div>
-          <div className="vote-body">
-            <Typography noWrap className="comment-body">
-              {comment.body}
-            </Typography>
-            <div className="vote-count">
+          <div className={classes.voteBody}>
+            <Typography>{comment.body}</Typography>
+            <div className={classes.voteCount}>
               <Badge
                 badgeContent={comment.voteScore}
                 style={{ marginRight: 20 }}
@@ -46,4 +87,4 @@ class Comments extends Component {
   }
 }
 
-export default connect()(Comments);
+export default connect()(withStyles(styles)(Comment));
