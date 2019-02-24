@@ -60,7 +60,7 @@ export function handleAddPost({ title, body, author, category }) {
     let timestamp = Date.now();
     return API.addPost({ title, body, author, category, id, timestamp }).then(
       res => {
-        dispatch(createPost({ title, body, author, category, id, timestamp }));
+        dispatch(createPost(res));
       }
     );
   };

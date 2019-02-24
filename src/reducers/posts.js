@@ -12,7 +12,7 @@ export default function posts(state = [], action) {
     case GET_POSTS:
       return newState.concat(...action.posts);
     case ADD_POST:
-      return newState.concat(...action.post);
+      return newState.concat(action.post);
     case EDIT_POST:
       let post = newState.find(post => post.id === action.id);
       post.body = action.body;

@@ -8,7 +8,8 @@ if (!token)
 
 const headers = {
   Accept: "application/json",
-  Authorization: token
+  Authorization: token,
+  'Content-Type': 'application/json',
 };
 
 export const getCategories = () =>
@@ -42,12 +43,12 @@ export const addPost = ({ id, timestamp, title, body, author, category }) =>
     method: "POST",
     headers: headers,
     body: JSON.stringify({
+      id,
+      timestamp,
       title,
       body,
       author,
-      category,
-      id,
-      timestamp
+      category
     })
   }).then(res => res.json());
 
