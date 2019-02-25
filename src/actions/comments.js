@@ -51,7 +51,7 @@ export function handleReceiveComments(id) {
   };
 }
 
-export function handleCreateComments({ body, author, parentId }) {
+export function handleCreateComment({ body, author, parentId }) {
   let id = uuid();
   let timestamp = Date.now();
   return dispatch => {

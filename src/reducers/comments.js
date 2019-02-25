@@ -13,7 +13,7 @@ export default function comments(state = [], action) {
     case GET_COMMENTS:
       return newState.concat(...action.comments);
     case ADD_COMMENT:
-      return newState.concat(...action.comment);
+      return newState.concat(action.comment);
     case EDIT_COMMENT:
       let comment = newState.find(comment => comment.id === action.comment.id);
       comment.body = action.comment.body;
