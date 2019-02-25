@@ -11,7 +11,7 @@ export default function comments(state = [], action) {
   let newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case GET_COMMENTS:
-      return newState.concat(...action.comments);
+      return newState = action.comments;
     case ADD_COMMENT:
       return newState.concat(action.comment);
     case EDIT_COMMENT:
