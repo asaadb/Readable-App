@@ -36,10 +36,11 @@ export function voteComment({ id, option }) {
   };
 }
 
-export function removeComment(id) {
+export function removeComment({id, parentId}) {
   return {
     type: REMOVE_COMMENT,
-    id
+    id,
+    parentId
   };
 }
 
@@ -80,10 +81,10 @@ export function handleVoteComment({ id, option }) {
   };
 }
 
-export function handleDeleteComment(id) {
+export function handleDeleteComment({id, parentId}) {
   return dispatch => {
     return API.deleteComment(id).then(() => {
-      dispatch(removeComment(id));
+      dispatch(removeComment({id, parentId}));
     });
   };
 }

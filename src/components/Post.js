@@ -62,7 +62,6 @@ class Post extends Component {
     const { post, classes, showLink } = this.props;
     return (
       <Card
-        key={post.id}
         className={showLink ? classes.post : classes.postDetail}
       >
         <CardContent className={classes.content}>

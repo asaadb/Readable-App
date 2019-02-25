@@ -21,8 +21,8 @@ class CommentActions extends Component {
   };
   handleRemove = () => {
     const { dispatch } = this.props;
-    const { id } = this.props.comment;
-    dispatch(handleDeleteComment(id));
+    const { id, parentId } = this.props.comment;
+    dispatch(handleDeleteComment({id, parentId}));
   };
   render() {
     return (
