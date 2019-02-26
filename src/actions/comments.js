@@ -1,5 +1,6 @@
 import * as API from "../utils/api";
 import uuid from "uuid";
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const GET_COMMENTS = "GET_COMMENTS";
 export const ADD_COMMENT = "ADD_COMMENT";
@@ -46,8 +47,10 @@ export function removeComment({id, parentId}) {
 
 export function handleReceiveComments(id) {
   return dispatch => {
+    dispatch(showLoading())
     return API.getCommentsForPost(id).then(comments => {
       dispatch(receiveComments(comments));
+      dispatch(hideLoading())
     });
   };
 }

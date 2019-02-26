@@ -7,6 +7,7 @@ import { handleReceiveCategories } from './actions/categories'
 import { handleReceivePosts } from './actions/posts'
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch  } from "react-router-dom";
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <LoadingBar />
           <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path="/add_post" exact component={NewPost} />
@@ -29,5 +31,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default connect()(App);

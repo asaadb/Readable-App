@@ -1,5 +1,6 @@
 import * as API from "../utils/api";
 import uuid from "uuid";
+import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const GET_POSTS = "GET_POSTS";
 export const ADD_POST = "ADD_POST";
@@ -47,9 +48,10 @@ export function removePost(id) {
 
 export function handleReceivePosts() {
   return dispatch => {
+    dispatch(showLoading())
     return API.getAllPosts().then(posts => {
-
       dispatch(receivePosts(posts));
+      dispatch(hideLoading())
     });
   };
 }
