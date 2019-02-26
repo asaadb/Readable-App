@@ -9,35 +9,10 @@ body {
   background-color: #fafafa
 }
 
-.container {
-  width:100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+.section-header {
+  font-size: 1rem;
+  color:#7c858b;
 }
-.categories {
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
-}
-
-.category {
-  min-width: 200px;
-  text-align: center;
-  padding: 10px;
-  display: flex;
-  margin: 1rem;
-  border: 1px solid #dad7d7;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.category>h2 {
-  text-align: center;
-  width: 100%;
-  font-size: 1.5rem;
-}
-
 .all-posts {
   display: flex;
   justify-content: center;

@@ -3,18 +3,44 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Post from "./Post";
 import AddIcon from "@material-ui/icons/Add";
-import { withStyles, Fab } from "@material-ui/core";
+import {
+  withStyles,
+  Fab,
+  Card,
+  CardContent,
+  Typography
+} from "@material-ui/core";
+import { OpenInNew } from "@material-ui/icons";
 
 const styles = theme => ({
+  container: {
+    width: "100%",
+    maxWidth: 1500,
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
   fab: {
     margin: theme.spacing.unit,
     position: "fixed",
     right: 25,
     bottom: 25
   },
-  add: {
-    fontSize: 50,
-    padding: 0
+  categories: {
+    display: "flex",
+    justifyContent: "center",
+    flexFlow: "row wrap",
+    margin: theme.spacing.unit
+  },
+  card: {
+    margin: theme.spacing.unit,
+    width: 200
+  },
+  title: {
+    fontSize: "1.2rem",
+    textAlign: "center"
+  },
+  categoryLink: {
+    textDecoration: "none"
   }
 });
 
@@ -24,23 +50,28 @@ class Dashboard extends Component {
     console.log("Posts: ", this.props.posts);
     const { posts, categories, classes } = this.props;
     return (
-      <div className="container">
+      <div className={classes.container}>
         <Link to="/add_post">
           <Fab color="primary" aria-label="Add" className={classes.fab}>
             <AddIcon />
           </Fab>
         </Link>
-        <section className="categories">
+        <section className={classes.categories}>
           {categories.map(category => (
-            <div className="category" key={category.name}>
-              <Link to={`/${category.name}`} className="category-link">
-                <h2>{category.name.toUpperCase()}</h2>
-              </Link>
-            </div>
+            <Card className={classes.card} key={category.name}>
+              <CardContent>
+                <Typography className={classes.title} variant="h3">
+                  {category.name}
+                </Typography>
+                <Link to={`/${category.name}`} className={classes.categoryLink}>
+                  <OpenInNew />
+                </Link>
+              </CardContent>
+            </Card>
           ))}
         </section>
         <section className="all-posts">
-          <h3> All Posts </h3>
+          <h3 className='section-header'> All Posts </h3>
           <ul className="posts">
             {posts.map(post => (
               <Post post={post} key={post.id} showLink={true} />
