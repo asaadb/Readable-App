@@ -27,7 +27,8 @@ const styles = theme => ({
     margin: "20px auto",
     boxShadow: " 0 1px 10px 0px #777",
     border: "1px solid #dad7d7",
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor:'#fff'
   },
   formHeader: {
     textAlign: "center",
