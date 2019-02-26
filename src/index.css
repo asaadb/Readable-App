@@ -10,8 +10,9 @@ body {
 }
 
 .section-header {
-  font-size: 1rem;
+  font-size: 2rem;
   color:#7c858b;
+  text-align: center;
 }
 .all-posts {
   display: flex;
@@ -28,7 +29,6 @@ body {
 
 .posts {
   width:100%;
-  margin: 1rem;
   padding: 0;
   box-sizing: border-box;
   display: flex;
