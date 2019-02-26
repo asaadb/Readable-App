@@ -9,7 +9,7 @@ class Category extends Component {
       <div>
         <ul>
           {categoryPosts.map(post => (
-            <Post post={post} key={post.id}/>
+            <Post post={post} key={post.id} showLink={true}/>
           ))
           }
         </ul>
