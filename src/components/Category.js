@@ -19,29 +19,35 @@ const styles = {
 class Category extends Component {
   render() {
     const { categoryPosts, classes, category } = this.props;
+    console.log('category', category)
     return (
-      <div className={classes.container}>
-        <h3 className="section-header"> {category} </h3>
-        {categoryPosts.length === 0 && (
-          <p className={classes.noPost}>
-            There are no posts related to {category}
-          </p>
-        )}
-        <ul className="posts">
-          {categoryPosts.map(post => (
-            <Post post={post} key={post.id} showLink={true} />
-          ))}
-        </ul>
+      <div>
+      {!category ? null : (
+        <div className={classes.container}>
+          <h3 className="section-header"> {category.name} </h3>
+          {categoryPosts.length === 0 && (
+            <p className={classes.noPost}>
+              There are no posts related to {category.name}
+            </p>
+          )}
+          <ul className="posts">
+            {categoryPosts.map(post => (
+              <Post post={post} key={post.id} showLink={true} />
+            ))}
+          </ul>
+        </div>
+      )}
       </div>
     );
   }
 }
 
-function mapStateToProps({ posts }, ownProps) {
+function mapStateToProps({ posts, categories }, ownProps) {
   const { category } = ownProps.match.params;
   const categoryPosts = posts.filter(post => post.category === category);
+  const categoryObj = categories.find(item => item.name === category)
   return {
-    category,
+    category: categoryObj,
     categoryPosts
   };
 }

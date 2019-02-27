@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoadingBar from "react-redux-loading";
 import Nav from "./components/Nav";
+import NotFound from "./components/NotFound";
 
 class App extends Component {
   componentDidMount() {
@@ -22,13 +23,15 @@ class App extends Component {
           <LoadingBar />
           <Nav />
           <div className="App">
+          {this.props.loading === true ? null : (
             <Switch>
               <Route path="/" exact component={Dashboard} />
               <Route path="/add_post" exact component={NewPost} />
               <Route path="/:category" exact component={Category} />
               <Route path="/:category/:post_id" exact component={PostDetail} />
-              <Route path="/:category/:post_id" exact component={PostDetail} />
+              <Route  component={NotFound} />
             </Switch>
+          )}
           </div>
         </Fragment>
       </Router>
@@ -36,4 +39,10 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+function mapStateToProps({posts, categories}) {
+  return {
+    loading:posts === null || categories === null
+  }
+}
+
+export default connect(mapStateToProps)(App);
