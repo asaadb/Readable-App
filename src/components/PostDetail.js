@@ -93,6 +93,7 @@ class PostDetail extends Component {
             open={this.state.open}
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
+            fullWidth={true}
           >
             <DialogTitle id="form-dialog-title">Comment</DialogTitle>
             <DialogContent>
@@ -104,7 +105,7 @@ class PostDetail extends Component {
                 id="name"
                 label="Name"
                 type="name"
-                fullWidth
+                fullWidth={true}
                 onChange={this.handleChange("author")}
               />
               <TextField
@@ -116,7 +117,7 @@ class PostDetail extends Component {
                 type="text"
                 multiline={true}
                 rows={5}
-                fullWidth
+                fullWidth={true}
                 onChange={this.handleChange("body")}
               />
             </DialogContent>

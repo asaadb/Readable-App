@@ -31,7 +31,7 @@ class CommentActions extends Component {
   handleClose = () => {
     this.setState({
       open: false,
-      body: this.props.comment.body, 
+      body: this.props.comment.body,
     });
   };
 
@@ -101,8 +101,9 @@ class CommentActions extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          fullWidth={true}
         >
-          <DialogTitle id="form-dialog-title">Edit Post</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Comment</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -114,7 +115,7 @@ class CommentActions extends Component {
               type="text"
               multiline={true}
               rows={5}
-              fullWidth
+              fullWidth={true}
               value={body}
               onChange={this.handleChange("body")}
             />

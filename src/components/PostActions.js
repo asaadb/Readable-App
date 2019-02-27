@@ -118,6 +118,7 @@ class PostActions extends Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
+          fullWidth={true}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Edit Post</DialogTitle>
@@ -130,7 +131,7 @@ class PostActions extends Component {
               id="name"
               label="title"
               type="title"
-              fullWidth
+              fullWidth={true}
               value={title}
               onChange={this.handleChange("title")}
             />
@@ -143,7 +144,7 @@ class PostActions extends Component {
               type="text"
               multiline={true}
               rows={5}
-              fullWidth
+              fullWidth={true}
               value={body}
               onChange={this.handleChange("body")}
             />
