@@ -51,6 +51,10 @@ export function handleReceiveComments(id) {
     return API.getCommentsForPost(id).then(comments => {
       dispatch(receiveComments(comments));
       dispatch(hideLoading())
+    })
+    .catch(error => {
+      alert('Sorry, there was an error fetching comments from the server')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -62,8 +66,11 @@ export function handleCreateComment({ body, author, parentId }) {
     return API.addComment({ body, author, parentId, id, timestamp }).then(
       comment => {
         dispatch(createComment(comment));
-      }
-    );
+      })
+      .catch(error => {
+        alert('Sorry, there was an error')
+        console.log('ERROR: ', error)
+      });
   };
 }
 
@@ -72,6 +79,10 @@ export function handleEditComment({ id, body }) {
   return dispatch => {
     return API.editComment({ id, body, timestamp }).then(() => {
       dispatch(updateComment({ id, timestamp, body }));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -80,6 +91,10 @@ export function handleVoteComment({ id, option }) {
   return dispatch => {
     return API.voteOnComment({ id, option }).then(() => {
       dispatch(voteComment({ id, option }));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -88,6 +103,10 @@ export function handleDeleteComment({id, parentId}) {
   return dispatch => {
     return API.deleteComment(id).then(() => {
       dispatch(removeComment({id, parentId}));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }

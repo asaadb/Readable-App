@@ -52,6 +52,10 @@ export function handleReceivePosts() {
     return API.getAllPosts().then(posts => {
       dispatch(receivePosts(posts));
       dispatch(hideLoading())
+    })
+    .catch(error => {
+      alert('Sorry, there was an error fetching Posts from the server')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -63,8 +67,11 @@ export function handleAddPost({ title, body, author, category }) {
     return API.addPost({ title, body, author, category, id, timestamp }).then(
       res => {
         dispatch(createPost(res));
-      }
-    );
+      })
+      .catch(error => {
+        alert('Sorry, there was an error')
+        console.log('ERROR: ', error)
+      });
   };
 }
 
@@ -72,6 +79,10 @@ export function handleUpdatePost({ id, title, body }) {
   return dispatch => {
     return API.editPost({ id, title, body }).then(post => {
       dispatch(updatePost(post));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -80,6 +91,10 @@ export function handleVotePost({ id, option }) {
   return dispatch => {
     return API.voteOnPost({ id, option }).then(() => {
       dispatch(votePost({ id, option }));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }
@@ -88,6 +103,10 @@ export function handleRemovePost(id) {
   return dispatch => {
     return API.deletePost(id).then(() => {
       dispatch(removePost(id));
+    })
+    .catch(error => {
+      alert('Sorry, there was an error')
+      console.log('ERROR: ', error)
     });
   };
 }

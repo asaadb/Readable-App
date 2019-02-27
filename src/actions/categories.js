@@ -15,6 +15,10 @@ export function handleReceiveCategories() {
     return API.getCategories().then(categories => {
       dispatch(receiveCategories(categories));
       dispatch(hideLoading())
+    })
+    .catch(error => {
+      alert('Sorry, there was an error fetching categories from the server')
+      console.log('ERROR: ', error)
     });
   };
 }
