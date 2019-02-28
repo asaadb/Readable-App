@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import {
@@ -57,56 +57,52 @@ const styles = {
   }
 };
 
-class Post extends Component {
-  render() {
-    const { post, classes, showLink } = this.props;
-    return (
-      <Card
-        className={showLink ? classes.post : classes.postDetail}
-      >
-        <CardContent className={classes.content}>
+const Post = props => {
+  const { post, classes, showLink } = props;
+  return (
+    <Card className={showLink ? classes.post : classes.postDetail}>
+      <CardContent className={classes.content}>
+        {showLink === true ? (
+          <Typography variant="h6" noWrap type="title">
+            {post.title}
+          </Typography>
+        ) : (
+          <Typography variant="h6" type="title">
+            {post.title}
+          </Typography>
+        )}
+        <div className={classes.author}>
+          <AccessTime style={{ marginRight: 5 }} />
+          <span>
+            {post.author} posted {formatDate(post.timestamp)}
+          </span>
+        </div>
+        <div className={classes.voteBody}>
           {showLink === true ? (
-            <Typography variant="h6" noWrap type="title">
-              {post.title}
-            </Typography>
+            <Typography noWrap>{post.body}</Typography>
           ) : (
-            <Typography variant="h6" type="title">
-              {post.title}
-            </Typography>
+            <Typography>{post.body}</Typography>
           )}
-          <div className={classes.author}>
-            <AccessTime style={{ marginRight: 5 }} />
-            <span>
-              {post.author} posted {formatDate(post.timestamp)}
-            </span>
+          <div className={classes.postCount}>
+            <Badge
+              badgeContent={post.voteScore}
+              style={{ marginRight: 20 }}
+              max={999}
+              color="primary"
+            >
+              <ThumbsUpDown />
+            </Badge>
+            <Badge badgeContent={post.commentCount} max={999} color="primary">
+              <Comment />
+            </Badge>
           </div>
-          <div className={classes.voteBody}>
-            {showLink === true ? (
-              <Typography noWrap>{post.body}</Typography>
-            ) : (
-              <Typography>{post.body}</Typography>
-            )}
-            <div className={classes.postCount}>
-              <Badge
-                badgeContent={post.voteScore}
-                style={{ marginRight: 20 }}
-                max={999}
-                color="primary"
-              >
-                <ThumbsUpDown />
-              </Badge>
-              <Badge badgeContent={post.commentCount} max={999} color="primary">
-                <Comment />
-              </Badge>
-            </div>
-          </div>
-          <CardActions>
-            <PostActions showLink={showLink} post={post} />
-          </CardActions>
-        </CardContent>
-      </Card>
-    );
-  }
-}
+        </div>
+        <CardActions>
+          <PostActions showLink={showLink} post={post} />
+        </CardActions>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default connect()(withStyles(styles)(Post));
