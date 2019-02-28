@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Post from "./Post";
@@ -44,44 +44,42 @@ const styles = theme => ({
   }
 });
 
-class Dashboard extends Component {
-  render() {
-    console.log("Props: ", this.props);
-    console.log("Posts: ", this.props.posts);
-    const { posts, categories, classes } = this.props;
-    return (
-      <div className={classes.container}>
-        <Link to="/add_post">
-          <Fab color="primary" aria-label="Add" className={classes.fab}>
-            <AddIcon />
-          </Fab>
-        </Link>
-        <section className={classes.categories}>
-          {categories.map(category => (
-            <Card className={classes.card} key={category.name}>
-              <CardContent>
-                <Typography className={classes.title} variant="h3">
-                  {category.name}
-                </Typography>
-                <Link to={`/${category.name}`} className={classes.categoryLink}>
-                  <OpenInNew />
-                </Link>
-              </CardContent>
-            </Card>
+const Dashboard = props => {
+  console.log("Props: ", props);
+  console.log("Posts: ", props.posts);
+  const { posts, categories, classes } = props;
+  return (
+    <div className={classes.container}>
+      <Link to="/add_post">
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
+      </Link>
+      <section className={classes.categories}>
+        {categories.map(category => (
+          <Card className={classes.card} key={category.name}>
+            <CardContent>
+              <Typography className={classes.title} variant="h3">
+                {category.name}
+              </Typography>
+              <Link to={`/${category.name}`} className={classes.categoryLink}>
+                <OpenInNew />
+              </Link>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+      <section className="all-posts">
+        <h3 className="section-header"> All Posts </h3>
+        <ul className="posts">
+          {posts.map(post => (
+            <Post post={post} key={post.id} showLink={true} />
           ))}
-        </section>
-        <section className="all-posts">
-          <h3 className='section-header'> All Posts </h3>
-          <ul className="posts">
-            {posts.map(post => (
-              <Post post={post} key={post.id} showLink={true} />
-            ))}
-          </ul>
-        </section>
-      </div>
-    );
-  }
-}
+        </ul>
+      </section>
+    </div>
+  );
+};
 
 function mapStateToProps({ categories, posts }) {
   return {
