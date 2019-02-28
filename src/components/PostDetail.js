@@ -19,6 +19,11 @@ import {
 } from "../actions/comments";
 
 const styles = theme => ({
+  container: {
+     maxWidth: 1300,
+     margin: "auto" ,
+     marginBottom: 35
+  },
   fab: {
     margin: theme.spacing.unit,
     position: "fixed",
@@ -75,7 +80,7 @@ class PostDetail extends Component {
     const { postComments, post, classes } = this.props;
     if (post) {
       return (
-        <div style={{ maxWidth: 1300, margin: "auto" }}>
+        <div className={classes.container}>
           <Post post={post} showLink={false} />
           {postComments.length > 0 &&
             postComments.map(comment => (
