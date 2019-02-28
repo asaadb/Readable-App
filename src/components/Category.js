@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Post from "./Post";
 import { withStyles } from "@material-ui/core";
@@ -16,12 +16,11 @@ const styles = {
   }
 };
 
-class Category extends Component {
-  render() {
-    const { categoryPosts, classes, category } = this.props;
-    console.log('category', category)
-    return (
-      <div>
+const Category = props => {
+  const { categoryPosts, classes, category } = props;
+  console.log("category", category);
+  return (
+    <div>
       {!category ? null : (
         <div className={classes.container}>
           <h3 className="section-header"> {category.name} </h3>
@@ -37,15 +36,14 @@ class Category extends Component {
           </ul>
         </div>
       )}
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 function mapStateToProps({ posts, categories }, ownProps) {
   const { category } = ownProps.match.params;
   const categoryPosts = posts.filter(post => post.category === category);
-  const categoryObj = categories.find(item => item.name === category)
+  const categoryObj = categories.find(item => item.name === category);
   return {
     category: categoryObj,
     categoryPosts
