@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { formatDate } from "../utils/helpers";
 import {
@@ -51,40 +51,38 @@ const styles = {
   }
 };
 
-class Comment extends Component {
-  render() {
-    const { comment, classes } = this.props;
-    return (
-      <Card className={classes.comment}>
-        <CardContent className={classes.content}>
-          <div className={classes.author}>
-            <Avatar className={classes.avatar}>
-              {comment.author[0].toUpperCase()}
-            </Avatar>
-            <span>
-              {comment.author} commented {formatDate(comment.timestamp)}
-            </span>
+const Comment = props => {
+  const { comment, classes } = props;
+  return (
+    <Card className={classes.comment}>
+      <CardContent className={classes.content}>
+        <div className={classes.author}>
+          <Avatar className={classes.avatar}>
+            {comment.author[0].toUpperCase()}
+          </Avatar>
+          <span>
+            {comment.author} commented {formatDate(comment.timestamp)}
+          </span>
+        </div>
+        <div className={classes.voteBody}>
+          <Typography>{comment.body}</Typography>
+          <div className={classes.voteCount}>
+            <Badge
+              badgeContent={comment.voteScore}
+              style={{ marginRight: 20 }}
+              max={999}
+              color="primary"
+            >
+              <ThumbsUpDown />
+            </Badge>
           </div>
-          <div className={classes.voteBody}>
-            <Typography>{comment.body}</Typography>
-            <div className={classes.voteCount}>
-              <Badge
-                badgeContent={comment.voteScore}
-                style={{ marginRight: 20 }}
-                max={999}
-                color="primary"
-              >
-                <ThumbsUpDown />
-              </Badge>
-            </div>
-          </div>
-          <CardActions>
-            <CommentActions comment={comment} />
-          </CardActions>
-        </CardContent>
-      </Card>
-    );
-  }
-}
+        </div>
+        <CardActions>
+          <CommentActions comment={comment} />
+        </CardActions>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default connect()(withStyles(styles)(Comment));
