@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { IconButton,   Button,
+import {
+  IconButton,
+  Button,
   TextField,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle } from "@material-ui/core";
+  DialogTitle
+} from "@material-ui/core";
 import {
   ThumbUp,
   ThumbDown,
   OpenInNew,
   Edit,
-  Delete,
+  Delete
 } from "@material-ui/icons";
-import { handleVotePost, handleRemovePost, handleUpdatePost } from "../actions/posts";
+import {
+  handleVotePost,
+  handleRemovePost,
+  handleUpdatePost
+} from "../actions/posts";
 
 const styles = {
   container: {
@@ -27,21 +34,21 @@ const styles = {
 
 class PostActions extends Component {
   state = {
-    title:this.props.post.title,
+    title: this.props.post.title,
     body: this.props.post.body,
-    open:false,
+    open: false
+  };
 
-  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
   handleClose = () => {
     this.setState({
-       open: false,
-       title:this.props.post.title,
-       body: this.props.post.body,
-      });
+      open: false,
+      title: this.props.post.title,
+      body: this.props.post.body
+    });
   };
 
   handleChange = name => event => {
@@ -49,35 +56,40 @@ class PostActions extends Component {
       [name]: event.target.value
     });
   };
+  
   isDisabled = () => {
     const { body, title } = this.state;
     return body === "" || title === "";
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const { dispatch, post } = this.props;
     const { title, body } = this.state;
-    const { id } = post
-    dispatch(handleUpdatePost({id, title, body}))
+    const { id } = post;
+    dispatch(handleUpdatePost({ id, title, body }));
     this.setState({
       open: false,
       body: "",
       title: ""
     });
   };
+
   handleVote = option => {
     const { dispatch } = this.props;
     const { id } = this.props.post;
     dispatch(handleVotePost({ id, option }));
   };
+
   handleRemove = () => {
     const { dispatch } = this.props;
     const { id } = this.props.post;
     dispatch(handleRemovePost(id));
   };
+
   render() {
     const { post, showLink } = this.props;
-    const { title, body } = this.state
+    const { title, body } = this.state;
     return (
       <div style={styles.container}>
         <div>
@@ -88,7 +100,11 @@ class PostActions extends Component {
               </Link>
             </IconButton>
           )}
-          <IconButton color="primary" aria-label="open" onClick={this.handleClickOpen}>
+          <IconButton
+            color="primary"
+            aria-label="open"
+            onClick={this.handleClickOpen}
+          >
             <Edit />
           </IconButton>
           <IconButton

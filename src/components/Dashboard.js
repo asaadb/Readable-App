@@ -45,8 +45,6 @@ const styles = theme => ({
 });
 
 const Dashboard = props => {
-  console.log("Props: ", props);
-  console.log("Posts: ", props.posts);
   const { posts, categories, classes } = props;
   return (
     <div className={classes.container}>
@@ -87,4 +85,5 @@ function mapStateToProps({ categories, posts }) {
     posts
   };
 }
+
 export default connect(mapStateToProps)(withStyles(styles)(Dashboard));

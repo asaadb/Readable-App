@@ -16,6 +16,7 @@ class App extends Component {
     this.props.dispatch(handleReceiveCategories());
     this.props.dispatch(handleReceivePosts());
   }
+  
   render() {
     return (
       <Router>
@@ -40,7 +41,6 @@ class App extends Component {
 }
 
 function mapStateToProps({posts, categories}) {
-  console.log('posts from msp: ', posts)
   return {
     loading:posts.length === 0 || categories.length === 0
   }

@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { IconButton,   TextField,
+import {
+  IconButton,
+  TextField,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Button } from "@material-ui/core";
+  Button
+} from "@material-ui/core";
 import { ThumbUp, ThumbDown, Edit, Delete } from "@material-ui/icons";
-import { handleVoteComment, handleDeleteComment, handleEditComment } from "../actions/comments";
+import {
+  handleVoteComment,
+  handleDeleteComment,
+  handleEditComment
+} from "../actions/comments";
 
 const styles = {
   container: {
@@ -21,9 +28,9 @@ const styles = {
 class CommentActions extends Component {
   state = {
     body: this.props.comment.body,
-    open:false,
+    open: false
+  };
 
-  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -31,7 +38,7 @@ class CommentActions extends Component {
   handleClose = () => {
     this.setState({
       open: false,
-      body: this.props.comment.body,
+      body: this.props.comment.body
     });
   };
 
@@ -40,21 +47,24 @@ class CommentActions extends Component {
       [name]: event.target.value
     });
   };
+
   isDisabled = () => {
     const { body, title } = this.state;
     return body === "" || title === "";
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const { dispatch, comment } = this.props;
     const { body } = this.state;
-    const { id } = comment
-    dispatch(handleEditComment({ id, body }))
+    const { id } = comment;
+    dispatch(handleEditComment({ id, body }));
     this.setState({
       open: false,
-      body: "",
+      body: ""
     });
   };
+
   handleVote = option => {
     const { dispatch } = this.props;
     const { id } = this.props.comment;
@@ -63,14 +73,19 @@ class CommentActions extends Component {
   handleRemove = () => {
     const { dispatch } = this.props;
     const { id, parentId } = this.props.comment;
-    dispatch(handleDeleteComment({id, parentId}));
+    dispatch(handleDeleteComment({ id, parentId }));
   };
+
   render() {
-    const { body } = this.state
+    const { body } = this.state;
     return (
       <div style={styles.container}>
         <div>
-          <IconButton color="primary" aria-label="open" onClick={this.handleClickOpen}>
+          <IconButton
+            color="primary"
+            aria-label="open"
+            onClick={this.handleClickOpen}
+          >
             <Edit />
           </IconButton>
           <IconButton
