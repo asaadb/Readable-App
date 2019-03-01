@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Post from "./Post";
 import { withStyles } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 
 const styles = {
   container: {
@@ -18,24 +19,24 @@ const styles = {
 
 const Category = props => {
   const { categoryPosts, classes, category } = props;
-  console.log("category", category);
+  if (!category) {
+    return <Redirect to="/NotFound" />;
+  }
   return (
     <div>
-      {!category ? null : (
-        <div className={classes.container}>
-          <h3 className="section-header"> {category.name} </h3>
-          {categoryPosts.length === 0 && (
-            <p className={classes.noPost}>
-              There are no posts related to {category.name}
-            </p>
-          )}
-          <ul className="posts">
-            {categoryPosts.map(post => (
-              <Post post={post} key={post.id} showLink={true} />
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className={classes.container}>
+        <h3 className="section-header"> {category.name} </h3>
+        {categoryPosts.length === 0 && (
+          <p className={classes.noPost}>
+            There are no posts related to {category.name}
+          </p>
+        )}
+        <ul className="posts">
+          {categoryPosts.map(post => (
+            <Post post={post} key={post.id} showLink={true} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

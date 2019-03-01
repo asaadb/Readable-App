@@ -17,12 +17,13 @@ import {
   handleReceiveComments,
   handleCreateComment
 } from "../actions/comments";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   container: {
-     maxWidth: 1300,
-     margin: "auto" ,
-     marginBottom: 35
+    maxWidth: 1300,
+    margin: "auto",
+    margingBottom: 35
   },
   fab: {
     margin: theme.spacing.unit,
@@ -56,10 +57,12 @@ class PostDetail extends Component {
       [name]: event.target.value
     });
   };
+
   isDisabled = () => {
     const { body, author } = this.state;
     return body === "" || author === "";
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const { dispatch, id } = this.props;
@@ -71,80 +74,80 @@ class PostDetail extends Component {
       author: ""
     });
   };
+
   componentDidMount() {
     const { dispatch, id } = this.props;
-    console.log("id for post ", id);
     dispatch(handleReceiveComments(id));
   }
+
   render() {
     const { postComments, post, classes } = this.props;
-    if (post) {
-      return (
-        <div className={classes.container}>
-          <Post post={post} showLink={false} />
-          {postComments.length > 0 &&
-            postComments.map(comment => (
-              <Comments key={comment.id} comment={comment} />
-            ))}
-          <Fab
-            color="primary"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={this.handleClickOpen}
-          >
-            <Comment />
-          </Fab>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-            fullWidth={true}
-          >
-            <DialogTitle id="form-dialog-title">Comment</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                required
-                variant="outlined"
-                margin="dense"
-                id="name"
-                label="Name"
-                type="name"
-                fullWidth={true}
-                onChange={this.handleChange("author")}
-              />
-              <TextField
-                required
-                variant="outlined"
-                margin="dense"
-                id="name"
-                label="Comment"
-                type="text"
-                multiline={true}
-                rows={5}
-                fullWidth={true}
-                onChange={this.handleChange("body")}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button
-                disabled={this.isDisabled()}
-                onClick={this.handleSubmit}
-                type="submit"
-                color="primary"
-              >
-                Send
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      );
-    } else {
-      return <p>Loading</p>;
+    if (!post) {
+      return <Redirect to="/NotFound" />;
     }
+    return (
+      <div className={classes.container}>
+        <Post post={post} showLink={false} />
+        {postComments.length > 0 &&
+          postComments.map(comment => (
+            <Comments key={comment.id} comment={comment} />
+          ))}
+        <Fab
+          color="primary"
+          aria-label="Add"
+          className={classes.fab}
+          onClick={this.handleClickOpen}
+        >
+          <Comment />
+        </Fab>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+          fullWidth={true}
+        >
+          <DialogTitle id="form-dialog-title">Comment</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              required
+              variant="outlined"
+              margin="dense"
+              id="name"
+              label="Name"
+              type="name"
+              fullWidth={true}
+              onChange={this.handleChange("author")}
+            />
+            <TextField
+              required
+              variant="outlined"
+              margin="dense"
+              id="name"
+              label="Comment"
+              type="text"
+              multiline={true}
+              rows={5}
+              fullWidth={true}
+              onChange={this.handleChange("body")}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button
+              disabled={this.isDisabled()}
+              onClick={this.handleSubmit}
+              type="submit"
+              color="primary"
+            >
+              Send
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
   }
 }
 
@@ -154,8 +157,6 @@ function mapStateToProps({ comments, posts }, ownProps) {
   const postComments = comments
     .filter(comment => comment.parentId === post_id)
     .sort((a, b) => a.timestamp - b.timestamp);
-  console.log("The Comments from PostDetails: ", postComments);
-
   return {
     post,
     id: post_id,
