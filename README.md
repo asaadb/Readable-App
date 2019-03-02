@@ -72,6 +72,17 @@ This builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Screenshots
+
+### Dashboard View
+![Dashboard](./public/images/Dashboard.PNG "Screenshot")
+
+### Post Detail View
+![PostDetail](./public/images/PostDetail.PNG "Screenshot")
+
+### Category List View
+![Dashboard](./public/images/Category.PNG "Screenshot")
+
 ## Tools & dependencies
 
 * This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
